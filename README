@@ -1,0 +1,40 @@
+
+https://github.com/swapsapar/simplewebapp
+
+Global setup:
+
+ Set up git
+  git config --global user.name "Swapnil Sapar"
+  git config --global user.email swapsapar@gmail.com
+      
+
+Next steps:
+
+  mkdir simplewebapp
+  cd simplewebapp
+  git init
+  touch README
+  git add README
+  git commit -m 'first commit'
+  git remote add origin git@github.com:swapsapar/simplewebapp.git
+  git push -u origin master
+      
+
+Existing Git Repo?
+
+  cd existing_git_repo
+  git remote add origin git@github.com:swapsapar/simplewebapp.git
+  git push -u origin master
+      
+
+Importing a Subversion Repo?
+
+  Click here
+      
+
+When you're done:
+
+  Continue
+
+
+

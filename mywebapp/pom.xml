@@ -1,13 +1,55 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <!-- The Basics -->
     <groupId>org.open</groupId>
     <artifactId>mywebapp</artifactId>
-    <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>mywebapp Maven Webapp</name>
-    <url>http://maven.apache.org</url>
+    <packaging>war</packaging>
 
+    <!-- More Project Information -->
+    <name>mywebapp Maven Webapp</name>
+    <description>this is sample web app, maven and jetty</description>
+    <url>http://maven.apache.org</url>
+    <inceptionYear>2012</inceptionYear> <!-- This is another good documentation point. It will at least help you remember where you have spent the last few years of your life -->
+    <organization>
+        <name>swapsapar open source</name>
+        <url>https://github.com/swapsapar/simplewebapp</url>
+    </organization>
+    <!--licenses>...</licenses-->
+    <!--developers>...</developers-->
+    <!--contributors>...</contributors-->
+
+    <!--parent>...</parent-->
+    <!--modules>...</modules!-->
+    <!--dependencyManagement>...</dependencyManagement-->
+
+    <!--properties>...</properties-->
+
+    <!-- Environment Settings -->
+    <!--issueManagement>
+        <system>Bugzilla</system>
+        <url>http://127.0.0.1/bugzilla/</url>
+    </issueManagement-->
+    <!--ciManagement>
+        <system>TeamCity</system>
+        <url>http://127.0.0.1:8011/continuum</url>
+    </ciManagement-->
+    <!--mailingLists>...</mailingLists-->
+
+    <scm>
+        <connection>scm:git:git://github.com:swapsapar/simplewebapp.git/mywebapp</connection>
+        <developerConnection>scm:git:git://github.com/swapsapar/simplewebapp.git/mywebapp</developerConnection>
+        <url>scm:git:git://github.com/swapsapar/simplewebapp.git/mywebapp</url>
+    </scm>
+
+    <prerequisites>
+        <maven>2.2.1</maven>
+    </prerequisites>
+
+    <!--repositories>...</repositories-->
+    <!--pluginRepositories>...</pluginRepositories-->
     <distributionManagement>
         <repository>
             <id>release-repo</id>
@@ -31,6 +73,7 @@
         </dependency>
     </dependencies>
 
+    <!-- Build Settings -->
     <build>
         <finalName>mywebapp</finalName>
         <plugins>
@@ -41,5 +84,7 @@
             </plugin>
         </plugins>
     </build>
+
+    <!--profiles>...</profiles-->
 
 </project>
