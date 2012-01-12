@@ -97,6 +97,7 @@
                             <goal>perform</goal>
                         </goals>
                         <configuration>
+                            <!-- fir error Cannot execute mojo: resources. It requires a project with an existing pom.xml, but the build is not using one." -->
                             <pomFileName>${artifactId}/pom.xml</pomFileName>
                         </configuration>
                     </execution>
