@@ -86,6 +86,20 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>7.2.0.RC0</version>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <!--tagWorkingDirectory>${basedir}/..</tagWorkingDirectory>
+                    <preparationGoals>
+                        clean verify -f ${artifactId}/pom.xml
+                    </preparationGoals>
+                    <connectionUrl>scm:svn:svn://localhost/svn/relative-parent/tags/${artifactId}-${release.version}</connectionUrl>
+                    <goals>clean deploy</goals-->
+                    <pomFileName>${artifactId}/pom.xml</pomFileName>
+                    <arguments>-f ${artifactId}/pom.xml</arguments>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
