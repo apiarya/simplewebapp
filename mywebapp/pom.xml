@@ -8,7 +8,7 @@
     <packaging>war</packaging>
 
     <!-- More Project Information -->
-    <name>mywebapp Maven Webapp</name>
+    <name>my-web-app</name>
     <description>this is sample web app, maven and jetty</description>
     <url>http://maven.apache.org</url>
     <inceptionYear>2012</inceptionYear> <!-- This is another good documentation point. It will at least help you remember where you have spent the last few years of your life -->
