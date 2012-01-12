@@ -89,17 +89,18 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <configuration>
-                    <preparationGoals>
-                        clean verify -f ${artifactId}/pom.xml
-                    </preparationGoals>
-                    <!--tagWorkingDirectory>${basedir}/..</tagWorkingDirectory>
-
-                    <connectionUrl>scm:svn:svn://localhost/svn/relative-parent/tags/${artifactId}-${release.version}</connectionUrl>
-                    <goals>clean deploy</goals>
-                    <pomFileName>${artifactId}/pom.xml</pomFileName>
-                    <arguments>-f ${artifactId}/pom.xml</arguments-->
-                </configuration>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>perform</goal>
+                        </goals>
+                        <configuration>
+                            <pomFileName>${artifactId}/pom.xml</pomFileName>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
