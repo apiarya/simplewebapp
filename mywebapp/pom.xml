@@ -45,7 +45,7 @@
         <developerConnection>scm:git:git@github.com:swapsapar/simplewebapp.git</developerConnection>
 
         <!-- browsable -->
-        <!--url>https://github.com/swapsapar/simplewebapp</url-->
+        <url>https://github.com/swapsapar/simplewebapp</url>
     </scm>
 
     <prerequisites>
@@ -65,6 +65,10 @@
             <name>Local File Snapshot Repository</name>
             <url>file:/Users/ssapar/mywork/abhyas/simplewebapp-repo/snapshot</url>
         </snapshotRepository>
+        <site>
+            <id>file:///Users/ssapar/mywork/abhyas/simplewebapp-mvnsite/index.html/</id>
+            <url>file:/Users/ssapar/mywork/abhyas/simplewebapp-mvnsite</url>
+        </site>
     </distributionManagement>
 
 
