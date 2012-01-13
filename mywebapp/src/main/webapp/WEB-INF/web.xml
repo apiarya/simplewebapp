@@ -1,7 +1,260 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
 
-<web-app>
-  <display-name>Archetype Created Web Application</display-name>
+    <!-- ========================================================== -->
+    <!-- General -->
+    <!-- ========================================================== -->
+
+    <!-- Name the application -->
+    <display-name>sampleapp</display-name>
+    <description>An example application which is used to play with some of the features of webapp</description>
+
+    <!-- This app is cluster-ready -->
+    <distributable />
+
+    <!-- Set timeout to 120 minutes -->
+    <session-config>
+        <session-timeout>120</session-timeout>
+    </session-config>
+
+
+    <!-- ========================================================== -->
+    <!-- Custom Tag Libraries -->
+    <!-- ========================================================== -->
+
+    <!-- Taglib declarations are no longer required since JSP 2.0, see Removing taglib from web.xml -->
+    <!-- The <jsp-config> parent tag is also optional (taglib can be specified at the top level). -->
+    <!-- 
+    <jsp-config> 
+            <taglib> 
+                    <taglib-uri>mytags</taglib-uri> 
+                    <taglib-location>/WEB-INF/jsp/mytaglib.tld</taglib-location> 
+            </taglib> 
+    </jsp-config> 
+    -->
+
+
+    <!-- ========================================================== -->
+    <!-- Context Parameters -->
+    <!-- ========================================================== -->
+
+    <context-param>
+        <description>Enable debugging for the application</description>
+        <param-name>debug</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <description>The email address of the administrator, used to send error reports.</description>
+        <param-name>webmaster</param-name>
+        <param-value>address@somedomain.com</param-value>
+    </context-param>
+
+
+    <!-- ========================================================== -->
+    <!-- JNDI Environment Variables -->
+    <!-- ========================================================== -->
+
+    <env-entry>
+        <env-entry-name>webmasterName</env-entry-name>
+        <env-entry-value>firstname lastname</env-entry-value>
+        <env-entry-type>java.lang.String</env-entry-type>
+    </env-entry>
+
+    <!-- ========================================================== -->
+    <!-- Servlets -->
+    <!-- ========================================================== -->
+
+    <!-- CMS Servlet, responds *.cms URL's -->
+    <servlet>
+        <!-- Identification -->
+        <servlet-name>intro-servlet</servlet-name>
+        <servlet-class>org.open.HiServlet</servlet-class>
+        <description>This servlet handles requests for the CMS (it is a controller in an MVC architecture)</description>
+
+        <!-- This servlet has two parameters -->
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>detail</param-name>
+            <param-value>2</param-value>
+        </init-param>
+
+        <!-- Load this servlet when the application starts (call the init() method of the servlet) -->
+        <load-on-startup>5</load-on-startup>
+        <!-- <run-at>0:00, 6:00, 12:00, 18:00</run-at> This tag is only valid for Resin -->
+    </servlet>
+
+    <!-- Map some URL's to the cms servlet (demonstrates *.extension mapping) -->
+    <servlet-mapping>
+        <!-- For any URL ending in .cms, the cms servlet will be called -->
+        <servlet-name>intro-servlet</servlet-name>
+        <url-pattern>hello</url-pattern>
+    </servlet-mapping>
+
+    <!-- ========================================================== -->
+    <!-- Filters -->
+    <!-- ========================================================== -->
+
+    <!-- Example filter to set character encoding on each request (from Tomcat servlets-examples context) -->
+    <filter>
+        <filter-name>TimerFilter-Name</filter-name>
+        <filter-class>org.open.TimerFilter</filter-class>
+        <description>
+            This filter times the execution of the request after
+            the filter itself, and prints the execution time to
+            the standard output.
+        </description>
+    </filter>
+    <filter-mapping>
+        <filter-name>TimerFilter-Name</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Example filter to dump the HTTP request at the top of each page (from Tomcat servlets-examples context) -->
+    <filter>
+        <filter-name>Request Dumper Filter</filter-name>
+        <filter-class>org.open.RequestDumperFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Request Dumper Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <!-- ========================================================== -->
+    <!-- Listeners -->
+    <!-- ========================================================== -->
+
+    <!-- Define example application events listeners -->
+    <listener>
+        <listener-class>org.open.LaunchListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.open.MySessionListener</listener-class>
+    </listener>
+
+
+    <!-- ========================================================== -->
+    <!-- Security -->
+    <!-- ========================================================== -->
+
+    <!-- Define roles -->
+    <security-role>
+        <role-name>admin</role-name>
+    </security-role>
+    <security-role>
+        <role-name>cms_editors</role-name>
+    </security-role>
+
+    <!-- Define a constraint to restrict access to /private/* -->
+    <security-constraint>
+
+        <display-name>Security constraint for the /private folder</display-name>
+
+        <web-resource-collection>
+
+            <web-resource-name>Protected Area</web-resource-name>
+            <url-pattern>/private/*</url-pattern>
+
+            <!-- If you list http methods, only those methods are protected. -->
+            <!-- Leave this commented out to protect all access -->
+            <!-- 
+            <http-method>DELETE</http-method> 
+            <http-method>GET</http-method> 
+            <http-method>POST</http-method> 
+            <http-method>PUT</http-method> 
+            -->
+
+        </web-resource-collection>
+
+        <auth-constraint>
+            <!-- Only only administrator and CMS editors to access this area -->
+            <role-name>admin</role-name>
+            <role-name>cms_editors</role-name>
+        </auth-constraint>
+
+    </security-constraint>
+
+    <!-- FORM based authentication -->
+    <!-- Leave this commented out, we will use BASIC (HTTP) authentication instead -->
+    <!-- 
+    <login-config> 
+            <auth-method>FORM</auth-method> 
+            <form-login-config> 
+                    <form-login-page>/login.jsp</form-login-page> 
+                    <form-error-page>/error.jsp</form-error-page> 
+            </form-login-config> 
+    </login-config> 
+    -->
+    <!-- This application uses BASIC authentication -->
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>Editor Login</realm-name>
+    </login-config>
+
+    <!-- Define a constraint to force SSL on all pages in the application -->
+    <!--security-constraint>
+
+        <web-resource-collection>
+            <web-resource-name>Entire Application</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+
+    </security-constraint-->
+
+
+    <!-- ========================================================== -->
+    <!-- Error Handler -->
+    <!-- ========================================================== -->
+
+    <!-- Define an error handler for 404 pages -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error404.jsp</location>
+    </error-page>
+
+    <!-- Define an error handler for java.lang.Throwable -->
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/errorThrowable.jsp</location>
+    </error-page>
+
+
+    <!-- ========================================================== -->
+    <!-- Extra MIME types -->
+    <!-- ========================================================== -->
+
+    <!-- Set XML mime-mapping so spreadsheets open properly instead of being sent as an octet/stream -->
+    <mime-mapping>
+        <extension>xls</extension>
+        <mime-type>application/vnd.ms-excel</mime-type>
+    </mime-mapping>
+
+
+    <!-- ========================================================== -->
+    <!-- Welcome Files -->
+    <!-- ========================================================== -->
+
+    <!-- Define, in order of preference, which file to show when no filename is defined in the path -->
+    <!-- eg: when user goes to http://yoursite.com/ or http://yoursite.com/somefolder -->
+    <!-- Defaults are provided in the server-wide web.xml file, such as index.jsp, index.htm -->
+    <!-- Note: using this tag overrides the defaults, so don't forget to add them here -->
+    <welcome-file-list>
+        <!-- Use index.swf if present, or splash.jsp, otherwise just look for the normal defaults -->
+        <welcome-file>index.swf</welcome-file>
+        <welcome-file>splash.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
 </web-app>

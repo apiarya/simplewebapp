@@ -79,16 +79,80 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+        </dependency-->
     </dependencies>
 
     <!-- Build Settings -->
     <build>
         <finalName>mywebapp</finalName>
+
         <plugins>
+            <!-- to avoid maven annotations are not supported in -source 1.3 -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>7.2.0.RC0</version>
+                <configuration>
+                    <scanIntervalSeconds>5</scanIntervalSeconds>
+                    <stopKey>stop</stopKey>
+                    <stopPort>9999</stopPort>
+
+                    <webAppConfig>
+                        <contextPath>/approot</contextPath>
+                        <baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
+                            <resourcesAsCSV>${project.basedir}/src/main/webapp,${project.basedir}/src/main/java/org/open</resourcesAsCSV>
+                        </baseResource>
+                    </webAppConfig>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>ENV_FOO</name>
+                            <value>BAR</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>org.eclipse.jetty.util.log.DEBUG</name>
+                            <value>false</value> <!-- set true for put jetty runtime in debug -->
+                        </systemProperty>
+                    </systemProperties>
+
+                    <!-- Dump request logs on console -->
+                    <requestLog implementation="org.eclipse.jetty.server.NCSARequestLog">
+                        <append>true</append>
+                    </requestLog>
+
+                    <!-- to fix: No LoginService for org.eclipse.jetty.security.authentication.BasicAuthenticator-->
+                    <loginServices>
+                        <loginService implementation="org.eclipse.jetty.security.HashLoginService">
+                            <name>Test Realm</name>
+                            <config>${basedir}/src/main/resources/realm.properties</config>
+                        </loginService>
+                    </loginServices>
+
+                    <!--connectors> change default port from 8080 to 8090
+                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                            <port>8090</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors-->
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
