@@ -39,14 +39,10 @@
     <!--mailingLists>...</mailingLists-->
 
     <scm>
-        <!-- read only -->
-        <connection>scm:git:git://github.com/swapsapar/simplewebapp.git</connection>
-
-        <!-- write -->
-        <developerConnection>scm:git:git@github.com:swapsapar/simplewebapp.git</developerConnection>
-
-        <!-- browsable -->
-        <url>https://github.com/swapsapar/simplewebapp.git</url>
+        <!-- git reference: http://maven.apache.org/scm/git.html -->
+        <connection>scm:git:git://github.com/swapsapar/simplewebapp.git</connection> <!-- read only -->
+        <developerConnection>scm:git:git@github.com:swapsapar/simplewebapp.git</developerConnection> <!-- write -->
+        <url>https://github.com/swapsapar/simplewebapp.git</url> <!-- browsable -->
     </scm>
 
     <prerequisites>
