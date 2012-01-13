@@ -1,6 +1,11 @@
 package org.open;
 
-import javax.servlet.*;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -54,16 +59,17 @@ public final class RequestDumperFilter implements Filter {
      * @throws IOException      if an input/output error occurs
      * @throws ServletException if a servlet error occurs
      */
-    public void doFilter(ServletRequest request, ServletResponse response,
-                         FilterChain chain)
+    public void doFilter(final ServletRequest request, final ServletResponse response,
+                         final FilterChain chain)
             throws IOException, ServletException {
 
-        if (filterConfig == null)
+        if (filterConfig == null) {
             return;
+        }
 
         // Render the generic servlet request properties
-        StringWriter sw = new StringWriter();
-        PrintWriter writer = new PrintWriter(sw);
+        final StringWriter sw = new StringWriter();
+        final PrintWriter writer = new PrintWriter(sw);
         writer.println("Request Received at " +
                 (new Timestamp(System.currentTimeMillis())));
         writer.println(" characterEncoding=" + request.getCharacterEncoding());
@@ -71,25 +77,27 @@ public final class RequestDumperFilter implements Filter {
         writer.println("       contentType=" + request.getContentType());
         writer.println("            locale=" + request.getLocale());
         writer.print("           locales=");
-        Enumeration locales = request.getLocales();
+        final Enumeration locales = request.getLocales();
         boolean first = true;
         while (locales.hasMoreElements()) {
-            Locale locale = (Locale) locales.nextElement();
-            if (first)
+            final Locale locale = (Locale) locales.nextElement();
+            if (first) {
                 first = false;
-            else
+            } else {
                 writer.print(", ");
+            }
             writer.print(locale.toString());
         }
         writer.println();
         Enumeration names = request.getParameterNames();
         while (names.hasMoreElements()) {
-            String name = (String) names.nextElement();
+            final String name = (String) names.nextElement();
             writer.print("         parameter=" + name + "=");
-            String values[] = request.getParameterValues(name);
+            final String[] values = request.getParameterValues(name);
             for (int i = 0; i < values.length; i++) {
-                if (i > 0)
+                if (i > 0) {
                     writer.print(", ");
+                }
                 writer.print(values[i]);
             }
             writer.println();
@@ -105,19 +113,20 @@ public final class RequestDumperFilter implements Filter {
         // Render the HTTP servlet request properties
         if (request instanceof HttpServletRequest) {
             writer.println("---------------------------------------------");
-            HttpServletRequest hrequest = (HttpServletRequest) request;
+            final HttpServletRequest hrequest = (HttpServletRequest) request;
             writer.println("       contextPath=" + hrequest.getContextPath());
             Cookie cookies[] = hrequest.getCookies();
-            if (cookies == null)
+            if (cookies == null) {
                 cookies = new Cookie[0];
-            for (int i = 0; i < cookies.length; i++) {
-                writer.println("            cookie=" + cookies[i].getName() +
-                        "=" + cookies[i].getValue());
+            }
+            for (final Cookie cooky : cookies) {
+                writer.println("            cookie=" + cooky.getName() +
+                        "=" + cooky.getValue());
             }
             names = hrequest.getHeaderNames();
             while (names.hasMoreElements()) {
-                String name = (String) names.nextElement();
-                String value = hrequest.getHeader(name);
+                final String name = (String) names.nextElement();
+                final String value = hrequest.getHeader(name);
                 writer.println("            header=" + name + "=" + value);
             }
             writer.println("            method=" + hrequest.getMethod());
@@ -146,7 +155,7 @@ public final class RequestDumperFilter implements Filter {
      *
      * @param filterConfig The filter configuration object
      */
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(final FilterConfig filterConfig) throws ServletException {
 
         this.filterConfig = filterConfig;
 
@@ -158,9 +167,11 @@ public final class RequestDumperFilter implements Filter {
      */
     public String toString() {
 
-        if (filterConfig == null)
+        if (filterConfig == null) {
             return ("RequestDumperFilter()");
-        StringBuffer sb = new StringBuffer("RequestDumperFilter(");
+        }
+        final StringBuilder sb;
+        sb = new StringBuilder("RequestDumperFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());

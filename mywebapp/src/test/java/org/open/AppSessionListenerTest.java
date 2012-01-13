@@ -18,7 +18,7 @@ public class AppSessionListenerTest {
 
     @Test
     public void testSessionStart() throws Exception {
-        AppSessionListener appSessionListener = new AppSessionListener();
+        final AppSessionListener appSessionListener = new AppSessionListener();
         appSessionListener.sessionStart(null);
     }
 }

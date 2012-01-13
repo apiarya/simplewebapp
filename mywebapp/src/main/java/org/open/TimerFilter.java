@@ -1,18 +1,24 @@
 package org.open;
 
-import javax.servlet.*;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import java.io.IOException;
 
 public final class TimerFilter implements Filter {
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(final FilterConfig filterConfig) throws ServletException {
         System.out.println("TimerFilter.init, filterConfig=" + filterConfig);
     }
 
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(final ServletRequest request, final ServletResponse response,
+                         final FilterChain chain) throws IOException, ServletException {
         System.out.println("TimerFilter.doFilter, request=" + request + ", response=" + response + ", chain=" + chain);
-        long startTime = System.currentTimeMillis();
+        final long startTime = System.currentTimeMillis();
         chain.doFilter(request, response);
-        long stopTime = System.currentTimeMillis();
+        final long stopTime = System.currentTimeMillis();
         System.out.println("Time to execute request: " + (stopTime - startTime) +
                 " milliseconds");
     }

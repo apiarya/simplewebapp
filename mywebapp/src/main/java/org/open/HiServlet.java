@@ -8,10 +8,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class HiServlet extends HttpServlet {
-    public void doGet(HttpServletRequest req,
-                      HttpServletResponse res)
+    public void doGet(final HttpServletRequest req,
+                      final HttpServletResponse res)
             throws ServletException, IOException {
-        PrintWriter out = res.getWriter();
+        final PrintWriter out = res.getWriter();
 
         out.println("Hi World Servlet");
         out.close();
