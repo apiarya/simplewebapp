@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="clean jetty:run" type="MavenRunConfiguration" factoryName="Maven">
+  <configuration default="false" name="mvn jetty:run" type="MavenRunConfiguration" factoryName="Maven">
     <MavenSettings>
       <option name="myGeneralSettings">
         <MavenGeneralSettings>

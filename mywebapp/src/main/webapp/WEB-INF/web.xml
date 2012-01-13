@@ -132,10 +132,10 @@
 
     <!-- Define example application events listeners -->
     <listener>
-        <listener-class>org.open.LaunchListener</listener-class>
+        <listener-class>org.open.AppLaunchListener</listener-class>
     </listener>
     <listener>
-        <listener-class>org.open.MySessionListener</listener-class>
+        <listener-class>org.open.AppSessionListener</listener-class>
     </listener>
 
 
