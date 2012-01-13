@@ -1,19 +1,14 @@
 package org.open;
 
+import javax.servlet.*;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.Timestamp;
 import java.util.Enumeration;
 import java.util.Locale;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -53,12 +48,11 @@ public final class RequestDumperFilter implements Filter {
      * Time the processing that is performed by all subsequent filters in the
      * current filter stack, including the ultimately invoked servlet.
      *
-     * @param request The servlet request we are processing
+     * @param request  The servlet request we are processing
      * @param response The servlet response we are creating
-     * @param chain The filter chain we are processing
-     *
-     * @exception IOException if an input/output error occurs
-     * @exception ServletException if a servlet error occurs
+     * @param chain    The filter chain we are processing
+     * @throws IOException      if an input/output error occurs
+     * @throws ServletException if a servlet error occurs
      */
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain)

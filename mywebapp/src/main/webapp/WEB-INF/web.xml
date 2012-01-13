@@ -13,7 +13,7 @@
     <description>An example application which is used to play with some of the features of webapp</description>
 
     <!-- This app is cluster-ready -->
-    <distributable />
+    <distributable/>
 
     <!-- Set timeout to 120 minutes -->
     <session-config>
