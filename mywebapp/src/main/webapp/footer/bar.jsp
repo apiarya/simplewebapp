@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <%@ page import="java.util.*" %>
 <%
     Cookie[] cookies = request.getCookies();
     if (cookies == null)
       cookies = new Cookie[0];
     %>
+
+This page: <a href="<%=request.getRequestURL()%>"><%=request.getRequestURL()%></a>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
     <body>
         <h1>Footer JSP</h1>

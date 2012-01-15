@@ -25,7 +25,11 @@
     <!--modules>...</modules!-->
     <!--dependencyManagement>...</dependencyManagement-->
 
-    <!--properties>...</properties-->
+    <properties>
+        <jetty.daemon-flag>false</jetty.daemon-flag>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
 
     <!-- Environment Settings -->
     <!--issueManagement>
@@ -63,8 +67,8 @@
             <url>file:/Users/ssapar/mywork/abhyas/simplewebapp-repo/snapshot</url>
         </snapshotRepository>
         <site>
-            <id>file:///Users/ssapar/mywork/abhyas/simplewebapp-mvnsite/index.html/</id>
-            <url>file:/Users/ssapar/mywork/abhyas/simplewebapp-mvnsite</url>
+            <id>local-deploy</id>
+            <url>file:///${basedir}/../../simplewebapp-mvnsite</url>
         </site>
     </distributionManagement>
 
@@ -94,6 +98,10 @@
             <version>2.0</version>
             <scope>provided</scope>
         </dependency-->
+        <!--dependency>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty-maven-plugin</artifactId>
+        </dependency-->
     </dependencies>
 
     <!-- Build Settings -->
@@ -114,13 +122,14 @@
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>7.2.0.RC0</version>
+                <!--version>7.5.2.v20111006</version-->
                 <configuration>
                     <scanIntervalSeconds>5</scanIntervalSeconds>
                     <stopKey>stop</stopKey>
-                    <stopPort>9999</stopPort>
+                    <stopPort>9989</stopPort>
 
                     <webAppConfig>
-                        <contextPath>/approot</contextPath>
+                        <contextPath>/mywebapp</contextPath>
                         <baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
                             <resourcesAsCSV>
                                 ${project.basedir}/src/main/webapp,${project.basedir}/src/main/java/org/open
@@ -159,7 +168,70 @@
                         </connector>
                     </connectors-->
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>stop-jetty-pre</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>start-jetty</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <scanIntervalSeconds>10</scanIntervalSeconds>
+                            <daemon>true</daemon>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>stop-jetty-post</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <executable>${basedir}/src/test/scripts/launch.sh</executable>
+                    <workingDirectory>.</workingDirectory>
+                    <arguments>
+                        <argument>${jetty.port}</argument>
+                        <argument>${jetty.daemon-flag}</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
@@ -277,6 +349,18 @@
         </plugins>
     </reporting>
 
-    <!--profiles>...</profiles-->
+    <profiles>
+        <!-- to run the jetty in daemon mode at the end of build, enable this profile by
+        mvn clean install -Djetty.port=8010 -P jettydaemon -->
+        <profile>
+            <id>jettydaemon</id>
+            <properties>
+                <jetty.daemon-flag>true</jetty.daemon-flag>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
 
 </project>

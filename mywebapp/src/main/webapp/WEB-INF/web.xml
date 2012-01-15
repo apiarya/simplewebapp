@@ -9,7 +9,7 @@
     <!-- ========================================================== -->
 
     <!-- Name the application -->
-    <display-name>sampleapp</display-name>
+    <display-name>mywebapp</display-name>
     <description>An example application which is used to play with some of the features of webapp</description>
 
     <!-- This app is cluster-ready -->
@@ -72,28 +72,25 @@
         <!-- Identification -->
         <servlet-name>intro-servlet</servlet-name>
         <servlet-class>org.open.HiServlet</servlet-class>
-        <description>This servlet handles requests for the CMS (it is a controller in an MVC architecture)</description>
+        <description>This servlet handles requests</description>
 
         <!-- This servlet has two parameters -->
-        <init-param>
+        <!--init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
         </init-param>
         <init-param>
             <param-name>detail</param-name>
             <param-value>2</param-value>
-        </init-param>
+        </init-param-->
 
         <!-- Load this servlet when the application starts (call the init() method of the servlet) -->
         <load-on-startup>5</load-on-startup>
-        <!-- <run-at>0:00, 6:00, 12:00, 18:00</run-at> This tag is only valid for Resin -->
     </servlet>
 
-    <!-- Map some URL's to the cms servlet (demonstrates *.extension mapping) -->
     <servlet-mapping>
-        <!-- For any URL ending in .cms, the cms servlet will be called -->
         <servlet-name>intro-servlet</servlet-name>
-        <url-pattern>hello</url-pattern>
+        <url-pattern>/hi/*</url-pattern>
     </servlet-mapping>
 
     <!-- ========================================================== -->
@@ -255,6 +252,7 @@
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.htm</welcome-file>
         <welcome-file>index.jsp</welcome-file>
+        <welcome-file>welcome.jsp</welcome-file>
     </welcome-file-list>
 
 </web-app>
