@@ -60,12 +60,12 @@
         <repository>
             <id>release-repo</id>
             <name>Local File Release Repository</name>
-            <url>file:/Users/ssapar/mywork/abhyas/simplewebapp-repo/releases</url>
+            <url>file:///${basedir}/../../simplewebapp-repo/releases</url>
         </repository>
         <snapshotRepository>
             <id>snapshot-repo</id>
             <name>Local File Snapshot Repository</name>
-            <url>file:/Users/ssapar/mywork/abhyas/simplewebapp-repo/snapshot</url>
+            <url>file:///${basedir}/../../simplewebapp-repo/snapshot</url>
         </snapshotRepository>
         <site>
             <id>local-deploy</id>
