@@ -30,6 +30,7 @@
         <jetty.port>8080</jetty.port>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <app.context>${project.artifactId}</app.context>
     </properties>
 
     <!-- Environment Settings -->
@@ -82,6 +83,17 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.1.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+        </dependency>
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.4</version>
@@ -107,7 +119,7 @@
 
     <!-- Build Settings -->
     <build>
-        <finalName>mywebapp</finalName>
+        <finalName>${project.artifactId}</finalName>
 
         <plugins>
             <!-- to avoid maven annotations are not supported in -source 1.3 -->
@@ -130,7 +142,7 @@
                     <stopPort>9989</stopPort>
 
                     <webAppConfig>
-                        <contextPath>/mywebapp</contextPath>
+                        <contextPath>/${app.context}</contextPath>
                         <baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
                             <resourcesAsCSV>
                                 ${project.basedir}/src/main/webapp,${project.basedir}/src/main/java/org/open
@@ -223,6 +235,9 @@
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.6</version>
+                <configuration>
+                    <argLine>-Dapp.context=${app.context} -Djetty.port=${jetty.port}</argLine>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
