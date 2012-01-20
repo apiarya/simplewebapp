@@ -3,7 +3,7 @@ home_dir=`pwd`
 echo "home_dir=$home_dir"
 
 tomcat_host=localhost
-tomcat_port=8080
+tomcat_port=8081
 tomcat_login=admin:password
 app_context=mywebapp
 

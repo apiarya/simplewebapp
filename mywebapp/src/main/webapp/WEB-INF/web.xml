@@ -67,7 +67,7 @@
     <!-- Servlets -->
     <!-- ========================================================== -->
 
-    <!-- CMS Servlet, responds *.cms URL's -->
+    <!-- app Servlet, responds *.app URL's -->
     <servlet>
         <!-- Identification -->
         <servlet-name>intro-servlet</servlet-name>
@@ -145,7 +145,7 @@
         <role-name>admin</role-name>
     </security-role>
     <security-role>
-        <role-name>cms_editors</role-name>
+        <role-name>app_editors</role-name>
     </security-role>
 
     <!-- Define a constraint to restrict access to /private/* -->
@@ -154,8 +154,8 @@
         <display-name>Security constraint for the /private folder</display-name>
 
         <web-resource-collection>
-
-            <web-resource-name>Protected Area</web-resource-name>
+            <!-- block these resources from leaking out on production -->
+            <web-resource-name>Internal-Only-Webapp-Resources</web-resource-name>
             <url-pattern>/private/*</url-pattern>
 
             <!-- If you list http methods, only those methods are protected. -->
@@ -170,29 +170,25 @@
         </web-resource-collection>
 
         <auth-constraint>
-            <!-- Only only administrator and CMS editors to access this area -->
+            <!-- Only only administrator access this area -->
             <role-name>admin</role-name>
-            <role-name>cms_editors</role-name>
         </auth-constraint>
 
     </security-constraint>
 
     <!-- FORM based authentication -->
-    <!-- Leave this commented out, we will use BASIC (HTTP) authentication instead -->
-    <!-- 
-    <login-config> 
-            <auth-method>FORM</auth-method> 
-            <form-login-config> 
-                    <form-login-page>/login.jsp</form-login-page> 
-                    <form-error-page>/error.jsp</form-error-page> 
-            </form-login-config> 
-    </login-config> 
-    -->
-    <!-- This application uses BASIC authentication -->
     <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/auth/login.jsp</form-login-page>
+            <form-error-page>/auth/login.jsp?Retry=True</form-error-page>
+        </form-login-config>
+    </login-config>
+    <!-- This application uses BASIC authentication -->
+    <!--login-config>
         <auth-method>BASIC</auth-method>
         <realm-name>Editor Login</realm-name>
-    </login-config>
+    </login-config-->
 
     <!-- Define a constraint to force SSL on all pages in the application -->
     <!--security-constraint>
@@ -214,10 +210,10 @@
     <!-- ========================================================== -->
 
     <!-- Define an error handler for 404 pages -->
-    <error-page>
+    <!--error-page>
         <error-code>404</error-code>
         <location>/error404.jsp</location>
-    </error-page>
+    </error-page-->
 
     <!-- Define an error handler for java.lang.Throwable -->
     <error-page>
@@ -252,7 +248,7 @@
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.htm</welcome-file>
         <welcome-file>index.jsp</welcome-file>
-        <welcome-file>welcome.jsp</welcome-file>
+        <!--welcome-file>welcome.jsp</welcome-file-->
     </welcome-file-list>
 
 </web-app>
