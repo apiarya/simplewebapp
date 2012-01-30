@@ -1,9 +1,8 @@
 <html>
 <body>
-<h2>Hello World!</h2>
-Welcome page: <a href="<%=request.getRequestURL()%>"><%=request.getRequestURL()%></a><BR>
-Bar page: <a href="footer/bar.jsp">footer/bar.jsp</a><BR>
-Mode page: <a href="appmode">appmode</a><BR>
+<h2>This is COMPILED mode</h2>
+Welcome page: <a href="<%=request.getRequestURL()%>"><%=request.getRequestURL()%></a>
+<BR>
     <table border="1">
         <tr><td>request.getMethod               </td><td><%=request.getMethod()%></td></tr>
         <tr><td>request.getScheme               </td><td><%=request.getScheme()%></td></tr>
@@ -14,6 +13,6 @@ Mode page: <a href="appmode">appmode</a><BR>
         <tr><td>request.getRequestURL           </td><td><%=request.getRequestURL()%></td></tr>
         <tr><td>request.getRequestURI           </td><td><%=request.getRequestURI()%></td></tr>
         <tr><td>request.getRealPath("/")        </td><td><%=request.getRealPath("/")%>
-        </table>
+    </table>
 </body>
 </html>

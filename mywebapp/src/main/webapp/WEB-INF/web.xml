@@ -42,6 +42,11 @@
     <!-- ========================================================== -->
 
     <context-param>
+        <param-name>propfile</param-name>
+        <param-value>mywebapp.properties</param-value>
+    </context-param>
+
+    <context-param>
         <description>Enable debugging for the application</description>
         <param-name>debug</param-name>
         <param-value>true</param-value>
@@ -91,6 +96,16 @@
     <servlet-mapping>
         <servlet-name>intro-servlet</servlet-name>
         <url-pattern>/hi/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>mode-servlet</servlet-name>
+        <servlet-class>org.open.mode.ModeSelection</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>mode-servlet</servlet-name>
+        <url-pattern>/appmode</url-pattern>
     </servlet-mapping>
 
     <!-- ========================================================== -->

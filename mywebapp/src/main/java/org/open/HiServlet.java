@@ -14,6 +14,7 @@ public class HiServlet extends HttpServlet {
         final PrintWriter out = res.getWriter();
 
         out.println("Hi World Servlet");
+        out.println(AppProperties.getInstance());
         out.close();
     }
 }

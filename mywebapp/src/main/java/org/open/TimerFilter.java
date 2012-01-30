@@ -1,6 +1,7 @@
 package org.open;
 
 import org.apache.log4j.Logger;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -11,6 +12,7 @@ import java.io.IOException;
 
 public final class TimerFilter implements Filter {
     private static Logger LOG = Logger.getLogger(TimerFilter.class);
+
     public void init(final FilterConfig filterConfig) throws ServletException {
         LOG.debug("TimerFilter.init, filterConfig=" + filterConfig);
     }
