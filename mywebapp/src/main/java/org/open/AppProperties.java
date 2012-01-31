@@ -9,7 +9,6 @@ import org.apache.log4j.PropertyConfigurator;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import java.io.File;
 import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.lang.reflect.Constructor;
@@ -37,38 +36,27 @@ public class AppProperties implements Serializable {
             throw new InstantiationError("reflection not allowed");
         }
         counter++;
-        String folderName = null;
+        String loadFileName;
         try {
             InitialContext context = new InitialContext();
-            folderName = (String) context.lookup("java:comp/env/" + ENV_PROP_NAME);
+            String folderName = (String) context.lookup("java:comp/env/" + ENV_PROP_NAME);
             initLog4J(folderName);
-
+            loadFileName = folderName + "/" + AppLaunchListener.getPropertyParamValue();
+            LOG.info("Found in java:comp/env/" + ENV_PROP_NAME + "=" + folderName);
         } catch (NamingException exp) {
             LOG.warn("exception in jndi lookup, " + ENV_PROP_NAME + " NOT found in java:comp/env/");
-            folderName = null;
+            loadFileName = AppLaunchListener.getPropertyParamValue();
+            LOG.info("Searching for "+loadFileName+" in classpath");
         }
-        if (folderName != null) {
-            LOG.info("Found in java:comp/env/" + ENV_PROP_NAME + "=" + folderName);
-            File configFile = new File(folderName + "/" + AppLaunchListener.getPropertyParamValue());
-            try {
-                PROPS_CONFIG = new PropertiesConfiguration(configFile);
-                PROPS_CONFIG.setReloadingStrategy(new FileChangedReloadingStrategy());
-                LOG.info("Loaded properties from CONTEXT. " + PROPS_CONFIG.getBasePath());
-            } catch (ConfigurationException exp) {
-                LOG.error("exception loading properties file " + configFile, exp);
-                folderName = null;
-            }
-        }
-        if (folderName == null) {
-            try {
-                PROPS_CONFIG = new PropertiesConfiguration(AppLaunchListener.getPropertyParamValue());
-                PROPS_CONFIG.setReloadingStrategy(new FileChangedReloadingStrategy());
-                LOG.info("Loaded properties from CLASSPATH. " + PROPS_CONFIG);
 
-            } catch (ConfigurationException e) {
-                LOG.fatal("Failed to load properties from classpath propStream" + PROPS_CONFIG);
-            }
+        try {
+            PROPS_CONFIG = new PropertiesConfiguration(loadFileName);
+            PROPS_CONFIG.setReloadingStrategy(new FileChangedReloadingStrategy());
+            LOG.info("Loaded property file: " + PROPS_CONFIG.getBasePath());
+        } catch (ConfigurationException exp) {
+            LOG.error("exception loading properties file: " + loadFileName, exp);
         }
+
         LOG.info("One and only instance created.");
     }
 
