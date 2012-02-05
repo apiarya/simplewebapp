@@ -5,6 +5,7 @@
     </CLASSES>
     <JAVADOC>
       <root url="http://commons.apache.org/configuration/apidocs" />
+      <root url="jar://$MAVEN_REPOSITORY$/commons-configuration/commons-configuration/1.7/commons-configuration-1.7-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/commons-configuration/commons-configuration/1.7/commons-configuration-1.7-sources.jar!/" />

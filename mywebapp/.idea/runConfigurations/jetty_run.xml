@@ -31,8 +31,8 @@
         <MavenRunnerParameters>
           <option name="goals">
             <list>
-              <option value="clean" />
-              <option value="jetty:run" />
+              <option value="org.mortbay.jetty:jetty-maven-plugin:7.2.0.RC0:run" />
+              <option value="-Djetty.port=8081" />
             </list>
           </option>
           <option name="profiles">
@@ -42,13 +42,7 @@
         </MavenRunnerParameters>
       </option>
     </MavenSettings>
-    <RunnerSettings RunnerId="Debug">
-      <option name="DEBUG_PORT" value="" />
-      <option name="TRANSPORT" value="0" />
-      <option name="LOCAL" value="true" />
-    </RunnerSettings>
     <RunnerSettings RunnerId="Run" />
-    <ConfigurationWrapper RunnerId="Debug" />
     <ConfigurationWrapper RunnerId="Run" />
     <method />
   </configuration>
