@@ -51,7 +51,7 @@
         <!-- git reference: http://maven.apache.org/scm/git.html -->
         <connection>scm:git:git://github.com/swapsapar/simplewebapp.git</connection> <!-- read only -->
         <developerConnection>scm:git:git@github.com:swapsapar/simplewebapp.git</developerConnection> <!-- write -->
-        <url>https://github.com/swapsapar/simplewebapp.git</url> <!-- browsable -->
+        <url>https://github.com/swapsapar/simplewebapp</url> <!-- browsable -->
     </scm>
 
     <prerequisites>
@@ -64,7 +64,7 @@
         <repository>
             <id>release-repo</id>
             <name>Local File Release Repository</name>
-            <url>file://${basedir}/../../../simplewebapp-repo/releases</url>
+            <url>file://${basedir}/../../../../simplewebapp-repo/releases</url>
         </repository>
         <snapshotRepository>
             <id>snapshot-repo</id>
