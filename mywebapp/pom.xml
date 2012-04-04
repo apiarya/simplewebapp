@@ -77,7 +77,7 @@
     </snapshotRepository>
     <site>
       <id>local-deploy</id>
-      <url>file://${basedir}/../../simplewebapp-mvnsite</url>
+      <url>file://${basedir}/../../simplewebapp-mvnsite/${project.version}</url>
     </site>
   </distributionManagement>
 
@@ -158,6 +158,7 @@
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-failsafe-plugin</artifactId>
       <version>2.12</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.maven.plugins</groupId>
