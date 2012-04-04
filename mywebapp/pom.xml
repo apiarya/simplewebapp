@@ -1,436 +1,644 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <!-- The Basics -->
-    <groupId>org.open</groupId>
-    <artifactId>mywebapp</artifactId>
-    <version>2.13-SNAPSHOT</version>
-    <packaging>war</packaging>
+  <!-- The Basics -->
+  <groupId>org.open</groupId>
+  <artifactId>mywebapp</artifactId>
+  <version>2.13-SNAPSHOT</version>
+  <packaging>war</packaging>
 
-    <!-- More Project Information -->
-    <name>my-web-app</name>
-    <description>this is sample web app, maven and jetty</description>
+  <!-- More Project Information -->
+  <name>my-web-app</name>
+  <description>this is sample web app, maven and jetty</description>
+  <url>https://github.com/swapsapar/simplewebapp</url>
+  <inceptionYear>2012</inceptionYear>
+  <!-- This is another good documentation point. It will at least help you remember where you have spent the last few years of your life -->
+  <organization>
+    <name>simplewebapp @ github public repository</name>
     <url>https://github.com/swapsapar/simplewebapp</url>
-    <inceptionYear>2012</inceptionYear>
-    <!-- This is another good documentation point. It will at least help you remember where you have spent the last few years of your life -->
-    <organization>
-        <name>simplewebapp @ github public repository</name>
-        <url>https://github.com/swapsapar/simplewebapp</url>
-    </organization>
-    <!--licenses>...</licenses-->
-    <!--developers>...</developers-->
-    <!--contributors>...</contributors-->
+  </organization>
+  <!--licenses>...</licenses-->
+  <!--developers>...</developers-->
+  <!--contributors>...</contributors-->
 
-    <!--parent>...</parent-->
-    <!--modules>...</modules!-->
-    <dependencyManagement>
+  <!--parent>...</parent-->
+  <!--modules>...</modules!-->
+  <dependencyManagement>
 
-    </dependencyManagement>
+  </dependencyManagement>
 
-    <properties>
-        <jetty.daemon-flag>false</jetty.daemon-flag>
-        <jetty.port>8080</jetty.port>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <app.context>${project.artifactId}</app.context>
-        <private-resource-dir>${project.build.directory}/${project.build.finalName}/private</private-resource-dir>
-    </properties>
+  <properties>
+    <jetty-version>7.2.0.RC0</jetty-version>
+    <jetty.daemon-flag>false</jetty.daemon-flag>
+    <jetty.port>8080</jetty.port>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <app.context>${project.artifactId}</app.context>
+    <private-resource-dir>${project.build.directory}/${project.build.finalName}/private</private-resource-dir>
+  </properties>
 
-    <!-- Environment Settings -->
-    <!--issueManagement>
-        <system>Bugzilla</system>
-        <url>http://127.0.0.1/bugzilla/</url>
-    </issueManagement-->
-    <!--ciManagement>
-        <system>TeamCity</system>
-        <url>http://127.0.0.1:8011/continuum</url>
-    </ciManagement-->
-    <!--mailingLists>...</mailingLists-->
+  <!-- Environment Settings -->
+  <!--issueManagement>
+      <system>Bugzilla</system>
+      <url>http://127.0.0.1/bugzilla/</url>
+  </issueManagement-->
+  <!--ciManagement>
+      <system>TeamCity</system>
+      <url>http://127.0.0.1:8011/continuum</url>
+  </ciManagement-->
+  <!--mailingLists>...</mailingLists-->
 
-    <scm>
-        <!-- git reference: http://maven.apache.org/scm/git.html -->
-        <connection>scm:git:git://github.com/swapsapar/simplewebapp.git</connection> <!-- read only -->
-        <developerConnection>scm:git:git@github.com:swapsapar/simplewebapp.git</developerConnection> <!-- write -->
-        <url>https://github.com/swapsapar/simplewebapp</url> <!-- browsable -->
-    </scm>
+  <scm>
+    <!-- git reference: http://maven.apache.org/scm/git.html -->
+    <connection>scm:git:git://github.com/swapsapar/simplewebapp.git</connection>
+    <!-- read only -->
+    <developerConnection>scm:git:git@github.com:swapsapar/simplewebapp.git</developerConnection>
+    <!-- write -->
+    <url>https://github.com/swapsapar/simplewebapp</url>
+    <!-- browsable -->
+  </scm>
 
-    <prerequisites>
-        <maven>3.0.4</maven>
-    </prerequisites>
+  <prerequisites>
+    <maven>3.0.4</maven>
+  </prerequisites>
 
-    <!--repositories>...</repositories-->
-    <!--pluginRepositories>...</pluginRepositories-->
-    <distributionManagement>
-        <repository>
-            <id>release-repo</id>
-            <name>Local File Release Repository</name>
-            <url>file://${basedir}/../../../../simplewebapp-repo/releases</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshot-repo</id>
-            <name>Local File Snapshot Repository</name>
-            <url>file://${basedir}/../../simplewebapp-repo/snapshot</url>
-        </snapshotRepository>
-        <site>
-            <id>local-deploy</id>
-            <url>file://${basedir}/../../simplewebapp-mvnsite</url>
-        </site>
-    </distributionManagement>
+  <!--repositories>...</repositories-->
+  <!--pluginRepositories>...</pluginRepositories-->
+  <distributionManagement>
+    <repository>
+      <id>release-repo</id>
+      <name>Local File Release Repository</name>
+      <url>file://${basedir}/../../../../simplewebapp-repo/releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>snapshot-repo</id>
+      <name>Local File Snapshot Repository</name>
+      <url>file://${basedir}/../../simplewebapp-repo/snapshot</url>
+    </snapshotRepository>
+    <site>
+      <id>local-deploy</id>
+      <url>file://${basedir}/../../simplewebapp-mvnsite</url>
+    </site>
+  </distributionManagement>
 
 
-    <dependencies>
-        <dependency>
-            <groupId>commons-configuration</groupId>
-            <artifactId>commons-configuration</artifactId>
-            <version>1.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.1.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.16</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.4</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.10</version>
-            <scope>test</scope>
-        </dependency>
-        <!--dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>jsp-api</artifactId>
-            <version>2.0</version>
-            <scope>provided</scope>
-        </dependency-->
-        <!--dependency>
-            <groupId>org.mortbay.jetty</groupId>
-            <artifactId>jetty-maven-plugin</artifactId>
-        </dependency-->
-    </dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>org.seleniumhq.selenium.client-drivers</groupId>
+      <artifactId>selenium-java-client-driver</artifactId>
+      <version>1.0.1</version>
+      <scope>test</scope>
+    </dependency>
 
-    <!-- Build Settings -->
-    <build>
-        <finalName>${project.artifactId}</finalName>
+    <dependency>
+      <groupId>commons-configuration</groupId>
+      <artifactId>commons-configuration</artifactId>
+      <version>1.7</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.1.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.16</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.4</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.10</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-war-plugin</artifactId>
+      <version>2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>2.3.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-release-plugin</artifactId>
+      <version>2.2.2</version>
+    </dependency>
+    <dependency>
+      <!-- this is a workaround for http://jira.codehaus.org/browse/SUREFIRE-714 -->
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-site-plugin</artifactId>
+      <version>3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.danielflower.mavenplugins</groupId>
+      <artifactId>maven-gitlog-plugin</artifactId>
+      <version>1.4.11</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mortbay.jetty</groupId>
+      <artifactId>jetty-maven-plugin</artifactId>
+      <version>${jetty-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>exec-maven-plugin</artifactId>
+      <version>1.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-failsafe-plugin</artifactId>
+      <version>2.12</version>
+    </dependency>
+    <!--dependency>
+        <groupId>javax.servlet.jsp</groupId>
+        <artifactId>jsp-api</artifactId>
+        <version>2.0</version>
+        <scope>provided</scope>
+    </dependency-->
+    <!--dependency>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+    </dependency-->
+  </dependencies>
 
-        <plugins>
-            <!-- custom manifest.mf file -->
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+  <!-- Build Settings -->
+  <build>
+    <finalName>${project.artifactId}</finalName>
 
-                            <addClasspath>true</addClasspath>
-                            <!--mainClass>fully.qualified.MainClass</mainClass-->
-                            <!--classpathPrefix>somecommonpath/</classpathPrefix-->
-                            <!--classpathLayoutType>repository</classpathLayoutType-->
-                            <!--customClasspathLayout>WEB-INF/lib/$${artifact.groupIdPath}/$${artifact.artifactId}-$${artifact.version}$${dashClassifier?}.$${artifact.extension}</customClasspathLayout-->
-                        </manifest>
-                        <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
-                        <manifestEntries>
-                            <project-url>${project.url}</project-url>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>
-            <!-- to avoid maven annotations are not supported in -source 1.3 -->
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-compiler-plugin</artifactId>
-              <version>2.3.2</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
+    <pluginManagement>
+      <plugins>
 
-            <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>7.2.0.RC0</version>
-                <!--version>7.5.2.v20111006</version-->
-                <configuration>
-                    <scanIntervalSeconds>5</scanIntervalSeconds>
-                    <stopKey>stop</stopKey>
-                    <stopPort>9989</stopPort>
+        <!-- to avoid maven annotations are not supported in -source 1.3 -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>1.6</source>
+            <target>1.6</target>
+          </configuration>
+        </plugin>
 
-                    <webAppConfig>
-                        <contextPath>/${app.context}</contextPath>
-                        <baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
-                            <resourcesAsCSV>
-                                ${project.basedir}/src/main/webapp,${project.basedir}/src/site
-                            </resourcesAsCSV>
-                        </baseResource>
-                    </webAppConfig>
-                    <systemProperties>
-                        <systemProperty>
-                            <name>ENV_FOO</name>
-                            <value>BAR</value>
-                        </systemProperty>
-                        <systemProperty>
-                            <name>org.eclipse.jetty.util.log.DEBUG</name>
-                            <value>false</value>
-                            <!-- set true for put jetty runtime in debug -->
-                        </systemProperty>
-                    </systemProperties>
+        <!-- custom manifest.mf file -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>2.2</version>
+          <configuration>
+            <archive>
+              <manifest>
+                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 
-                    <!-- Dump request logs on console -->
-                    <requestLog implementation="org.eclipse.jetty.server.NCSARequestLog">
-                        <append>true</append>
-                    </requestLog>
+                <addClasspath>true</addClasspath>
+                <!--mainClass>fully.qualified.MainClass</mainClass-->
+                <!--classpathPrefix>somecommonpath/</classpathPrefix-->
+                <!--classpathLayoutType>repository</classpathLayoutType-->
+                <!--customClasspathLayout>WEB-INF/lib/$${artifact.groupIdPath}/$${artifact.artifactId}-$${artifact.version}$${dashClassifier?}.$${artifact.extension}</customClasspathLayout-->
+              </manifest>
+              <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+              <manifestEntries>
+                <project-url>${project.url}</project-url>
+              </manifestEntries>
+            </archive>
+          </configuration>
+        </plugin>
 
-                    <!-- to fix: No LoginService for org.eclipse.jetty.security.authentication.BasicAuthenticator-->
-                    <loginServices>
-                        <loginService implementation="org.eclipse.jetty.security.HashLoginService">
-                            <name>Test Realm</name>
-                            <config>${basedir}/src/main/resources/realm.properties</config>
-                        </loginService>
-                    </loginServices>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.2.2</version>
+          <executions>
+            <execution>
+              <id>default</id>
+              <goals>
+                <goal>perform</goal>
+              </goals>
+              <configuration>
+                <!-- fir error Cannot execute mojo: resources. It requires a project with an existing pom.xml, but the build is not using one." -->
+                <pomFileName>${project.artifactId}/pom.xml</pomFileName>
+                <scmCommentPrefix>some-release-comment</scmCommentPrefix>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
 
-                    <!--connectors> change default port from 8080 to 8090
-                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-                            <port>8090</port>
-                            <maxIdleTime>60000</maxIdleTime>
-                        </connector>
-                    </connectors-->
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>stop-jetty-pre</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>stop</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>start-jetty</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <scanIntervalSeconds>10</scanIntervalSeconds>
-                            <daemon>true</daemon>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>stop-jetty-post</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>stop</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
 
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <executions>
-                    <execution>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <executable>${basedir}/src/test/scripts/launch.sh</executable>
-                    <workingDirectory>.</workingDirectory>
-                    <arguments>
-                        <argument>${jetty.port}</argument>
-                        <argument>${jetty.daemon-flag}</argument>
-                    </arguments>
-                </configuration>
-            </plugin>
+        <!-- this generated git changelogs -->
+        <plugin>
+          <groupId>com.github.danielflower.mavenplugins</groupId>
+          <artifactId>maven-gitlog-plugin</artifactId>
+          <version>1.4.11</version>
+          <configuration>
+            <reportTitle>Changelog for ${project.name} version ${project.version}</reportTitle>
+            <verbose>false</verbose>
+            <outputDirectory>${private-resource-dir}</outputDirectory>
+          </configuration>
+        </plugin>
 
-            <plugin>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.12</version>
-                <configuration>
-                    <argLine>-Dapp.context=${app.context} -Djetty.port=${jetty.port}</argLine>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+        <plugin>
+          <groupId>org.mortbay.jetty</groupId>
+          <artifactId>jetty-maven-plugin</artifactId>
+          <version>${jetty-version}</version>
+          <configuration>
+            <scanIntervalSeconds>5</scanIntervalSeconds>
+            <stopKey>stop</stopKey>
+            <stopPort>9989</stopPort>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.2.2</version>
-                <executions>
-                    <execution>
-                        <id>default</id>
-                        <goals>
-                            <goal>perform</goal>
-                        </goals>
-                        <configuration>
-                            <!-- fir error Cannot execute mojo: resources. It requires a project with an existing pom.xml, but the build is not using one." -->
-                            <pomFileName>${project.artifactId}/pom.xml</pomFileName>
-                          <scmCommentPrefix>some-release-comment</scmCommentPrefix>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <!-- this is a workaround for http://jira.codehaus.org/browse/SUREFIRE-714 -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.0</version>
-            </plugin>
+            <webAppConfig>
+              <contextPath>/${app.context}</contextPath>
+              <baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
+                <resourcesAsCSV>
+                  ${project.basedir}/src/main/webapp,${project.basedir}/src/site
+                </resourcesAsCSV>
+              </baseResource>
+            </webAppConfig>
+            <systemProperties>
+              <systemProperty>
+                <name>org.eclipse.jetty.util.log.DEBUG</name>
+                <value>false</value>
+                <!-- set true for put jetty runtime in debug -->
+              </systemProperty>
+            </systemProperties>
 
-            <!-- this generated git changelogs -->
-            <plugin>
-                <groupId>com.github.danielflower.mavenplugins</groupId>
-                <artifactId>maven-gitlog-plugin</artifactId>
-                <version>1.4.9</version>
-                <configuration>
-                    <reportTitle>Changelog for ${project.name} version ${project.version}</reportTitle>
-                    <verbose>false</verbose>
-                    <outputDirectory>${private-resource-dir}</outputDirectory>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            <!-- Dump request logs on console -->
+            <requestLog implementation="org.eclipse.jetty.server.NCSARequestLog">
+              <append>true</append>
+            </requestLog>
 
-        </plugins>
-    </build>
+            <!-- to fix: No LoginService for org.eclipse.jetty.security.authentication.BasicAuthenticator-->
+            <!--loginServices>
+              <loginService implementation="org.eclipse.jetty.plus.jaas.JAASLoginService">
+                <name>Test JAAS Realm</name>
+                <loginModuleName>xyz</loginModuleName>
+              </loginService>
+            </loginServices-->
+            <loginServices>
+              <loginService implementation="org.eclipse.jetty.security.HashLoginService">
+                <name>Test Realm</name>
+                <config>${basedir}/src/main/resources/realm.properties</config>
+              </loginService>
+            </loginServices>
 
-    <reporting>
+
+            <!--connectors> change default port from 8080 to 8090
+                <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                    <port>8090</port>
+                    <maxIdleTime>60000</maxIdleTime>
+                </connector>
+            </connectors-->
+          </configuration>
+          <executions>
+            <execution>
+              <id>stop-jetty-pre</id>
+              <phase>pre-integration-test</phase>
+              <goals>
+                <goal>stop</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>start-jetty</id>
+              <phase>pre-integration-test</phase>
+              <goals>
+                <goal>run</goal>
+              </goals>
+              <configuration>
+                <scanIntervalSeconds>10</scanIntervalSeconds>
+                <daemon>true</daemon>
+              </configuration>
+            </execution>
+            <execution>
+              <id>stop-jetty-post</id>
+              <phase>post-integration-test</phase>
+              <goals>
+                <goal>stop</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>1.2.1</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>exec</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <executable>${basedir}/src/test/scripts/launch.sh</executable>
+            <workingDirectory>.</workingDirectory>
+            <arguments>
+              <argument>${jetty.port}</argument>
+              <argument>${jetty.daemon-flag}</argument>
+            </arguments>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>2.12</version>
+          <configuration>
+            <argLine>-Dapp.context=${app.context} -Djetty.port=${jetty.port}</argLine>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>integration-test</goal>
+                <goal>verify</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+      </plugins>
+    </pluginManagement>
+
+
+    <plugins>
+      <plugin>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>stop-jetty-pre</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>stop</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>start-jetty</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <scanIntervalSeconds>10</scanIntervalSeconds>
+              <daemon>true</daemon>
+            </configuration>
+          </execution>
+          <execution>
+            <id>stop-jetty-post</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>stop</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>selenium-maven-plugin</artifactId>
+        <version>2.2</version>
+        <executions>
+          <execution>
+            <id>first-stop-selenium</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>stop-server</goal>
+            </goals>
+            <configuration>
+              <skip>true</skip>
+            </configuration>
+          </execution>
+          <execution>
+            <id>start-selenium</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>start-server</goal>
+            </goals>
+            <configuration>
+              <background>true</background>
+            </configuration>
+          </execution>
+          <execution>
+            <id>last-stop-selenium</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>stop-server</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+
+
+
+      <!-- this generated git changelogs -->
+      <plugin>
+        <groupId>com.github.danielflower.mavenplugins</groupId>
+        <artifactId>maven-gitlog-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+
+  <profiles>
+    <!-- to run the jetty in daemon mode at the end of build, enable this profile by
+mvn clean install -Djetty.port=8010 -P jettydaemon -->
+    <profile>
+      <id>jettydaemon</id>
+      <properties>
+        <jetty.daemon-flag>true</jetty.daemon-flag>
+      </properties>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+    </profile>
+
+    <profile>
+      <id>sel</id>
+      <build>
         <plugins>
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
-            <artifactId>jdepend-maven-plugin</artifactId>
-            <version>2.0-beta-2</version>
-          </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>2.4</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-plugin-plugin</artifactId>
-                <version>2.9</version>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>2.4.0</version>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.5.1</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-changes-plugin</artifactId>
-                <version>2.6</version>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>changes-report</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-changelog-plugin</artifactId>
-                <version>2.2</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.9</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>2.7.1</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>2.12</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jxr-plugin</artifactId>
-                <version>2.3</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.8.1</version>
-                <reportSets>
-                    <reportSet>
-                        <id>html</id>
-                        <configuration>
-                            <doctitle>My API for ${project.name} ${project.version}</doctitle>
-                            <windowtitle>My API for ${project.name} ${project.version}</windowtitle>
-                        </configuration>
-                        <reports>
-                            <report>javadoc</report>
-                        </reports>
-                    </reportSet>
-                    <reportSet>
-                        <id>test-html</id>
-                        <configuration>
-                            <testDoctitle>My Test API for ${project.name} ${project.version}</testDoctitle>
-                            <testWindowtitle>My Test API for ${project.name} ${project.version}</testWindowtitle>
-                        </configuration>
-                        <reports>
-                            <report>test-javadoc</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
+            <artifactId>selenium-maven-plugin</artifactId>
+            <version>2.2</version>
+            <executions>
+              <execution>
+                <phase>pre-integration-test</phase>
+                <goals>
+                  <goal>start-server</goal>
+                </goals>
                 <configuration>
+                  <background>true</background>
                 </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
+              </execution>
+            </executions>
+          </plugin>
 
-    <profiles>
-        <!-- to run the jetty in daemon mode at the end of build, enable this profile by
-        mvn clean install -Djetty.port=8010 -P jettydaemon -->
-        <profile>
-            <id>jettydaemon</id>
-            <properties>
-                <jetty.daemon-flag>true</jetty.daemon-flag>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
-    </profiles>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <!-- Skip the normal tests, we'll run them in the integration-test phase -->
+              <skip>true</skip>
+            </configuration>
+
+            <executions>
+              <execution>
+                <phase>integration-test</phase>
+                <goals>
+                  <goal>test</goal>
+                </goals>
+                <configuration>
+                  <skip>false</skip>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jdepend-maven-plugin</artifactId>
+        <version>2.0-beta-2</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>2.4</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-plugin-plugin</artifactId>
+        <version>2.9</version>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <version>2.4.0</version>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>cobertura-maven-plugin</artifactId>
+        <version>2.5.1</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-changes-plugin</artifactId>
+        <version>2.6</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>changes-report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-changelog-plugin</artifactId>
+        <version>2.2</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>2.9.1</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>2.7.1</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>2.12</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>2.3</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.8.1</version>
+        <reportSets>
+          <reportSet>
+            <id>html</id>
+            <configuration>
+              <doctitle>My API for ${project.name} ${project.version}</doctitle>
+              <windowtitle>My API for ${project.name} ${project.version}</windowtitle>
+            </configuration>
+            <reports>
+              <report>javadoc</report>
+            </reports>
+          </reportSet>
+          <reportSet>
+            <id>test-html</id>
+            <configuration>
+              <testDoctitle>My Test API for ${project.name} ${project.version}</testDoctitle>
+              <testWindowtitle>My Test API for ${project.name} ${project.version}</testWindowtitle>
+            </configuration>
+            <reports>
+              <report>test-javadoc</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+        <configuration>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+
 
 </project>
