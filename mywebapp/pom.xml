@@ -560,8 +560,6 @@ mvn clean install -Djetty.port=8010 -P jettydaemon -->
 
   <reporting>
     <plugins>
-
-    <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
